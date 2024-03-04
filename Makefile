@@ -20,10 +20,10 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-CUDA_VER?=
-ifeq ($(CUDA_VER),)
-  $(error "CUDA_VER is not set")
-endif
+#CUDA_VER?=
+#ifeq ($(CUDA_VER),)
+#  $(error "CUDA_VER is not set")
+#endif
 
 APP:= deepstream-test5-analytics
 
@@ -52,12 +52,14 @@ OBJS+= deepstream_nvdsanalytics_meta.o
 
 CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deepstream-app/ -DDS_VERSION_MINOR=1 -DDS_VERSION_MAJOR=5
 CFLAGS+= -I$(INC_DIR)
-CFLAGS+= -I/usr/local/cuda-$(CUDA_VER)/include
+#CFLAGS+= -I/usr/local/cuda-$(CUDA_VER)/include
+CFLAGS+= -I/usr/local/cuda/include
 
 LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper \
        -lnvdsgst_customhelper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
        -lgstrtspserver-1.0 -ldl -Wl,-rpath,$(LIB_INSTALL_DIR)
-LIBS+= -L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart
+#LIBS+= -L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart
+LIBS+= -L/usr/local/cuda/lib64/ -lcudart
 
 CFLAGS+= `pkg-config --cflags $(PKGS)`
 
